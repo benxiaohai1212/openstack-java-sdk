@@ -2,6 +2,8 @@ package com.woorea.openstack.keystone.v3.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @JsonRootName("project")
 public class Project {
@@ -46,5 +48,20 @@ public class Project {
 	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
 	}
-	
+
+	@Override
+	public String toString() {
+		ObjectMapper objectMapper = new ObjectMapper();
+		try {
+			return objectMapper.writeValueAsString(this);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		return "Project{" +
+				"id='" + id + '\'' +
+				", domainId='" + domainId + '\'' +
+				", name='" + name + '\'' +
+				", enabled=" + enabled +
+				'}';
+	}
 }

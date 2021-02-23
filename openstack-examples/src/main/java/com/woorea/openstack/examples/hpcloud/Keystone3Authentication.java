@@ -17,7 +17,7 @@ public class Keystone3Authentication {
     Keystone keystone = new Keystone(ExamplesConfiguration.KEYSTONE_AUTH_URL);
     
     Authentication auth = new Authentication();
-    auth.setIdentity(Identity.password(ExamplesConfiguration.KEYSTONE_USERNAME, ExamplesConfiguration.KEYSTONE_PASSWORD));
+    auth.setIdentity(Identity.password(ExamplesConfiguration.DEFAULT_NAME,ExamplesConfiguration.KEYSTONE_USERNAME, ExamplesConfiguration.KEYSTONE_PASSWORD));
     
     OpenStackResponse response = keystone.tokens().authenticate(auth).request();
     

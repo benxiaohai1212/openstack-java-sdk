@@ -1,12 +1,13 @@
 package com.woorea.openstack.keystone.v3.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.base.MoreObjects;
+
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import com.woorea.openstack.keystone.model.User;
 
 public class Users implements Iterable<User>,  Serializable {
 
@@ -25,7 +26,15 @@ public class Users implements Iterable<User>,  Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "Users [list=" + list + "]";
+		ObjectMapper  objectMapper  = new ObjectMapper();
+		try {
+			return objectMapper.writeValueAsString(this);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		return MoreObjects.toStringHelper(this)
+				.add("users", list)
+				.toString();
 	}
 
 	@Override

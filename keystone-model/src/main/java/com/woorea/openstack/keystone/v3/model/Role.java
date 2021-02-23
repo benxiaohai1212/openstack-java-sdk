@@ -3,6 +3,8 @@ package com.woorea.openstack.keystone.v3.model;
 import java.io.Serializable;
 
 import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @JsonRootName("role")
 public class Role implements Serializable {
@@ -64,4 +66,19 @@ public class Role implements Serializable {
 		this.enabled = enabled;
 	}
 
+	@Override
+	public String toString() {
+		ObjectMapper objectMapper = new ObjectMapper();
+		try {
+			return objectMapper.writeValueAsString(this);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		return "Role{" +
+				"id='" + id + '\'' +
+				", name='" + name + '\'' +
+				", description='" + description + '\'' +
+				", enabled='" + enabled + '\'' +
+				'}';
+	}
 }

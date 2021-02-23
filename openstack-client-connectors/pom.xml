@@ -42,7 +42,7 @@
 		<dependency>
 			<groupId>com.woorea</groupId>
 			<artifactId>openstack-client</artifactId>
-			<version>3.2.10-SNAPSHOT</version>
+			<version>${parent.version}</version>
 		</dependency>
 	</dependencies>
 </project>

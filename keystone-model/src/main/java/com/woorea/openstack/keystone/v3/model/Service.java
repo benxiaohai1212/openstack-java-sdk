@@ -1,6 +1,8 @@
 package com.woorea.openstack.keystone.v3.model;
 
 import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @JsonRootName("service")
 public class Service {
@@ -44,5 +46,20 @@ public class Service {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
+	@Override
+	public String toString() {
+		ObjectMapper objectMapper = new ObjectMapper();
+		try {
+			return objectMapper.writeValueAsString(this);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		return "Service{" +
+				"id='" + id + '\'' +
+				", type='" + type + '\'' +
+				", name='" + name + '\'' +
+				", description='" + description + '\'' +
+				'}';
+	}
 }

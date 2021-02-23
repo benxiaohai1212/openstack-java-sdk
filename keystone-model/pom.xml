@@ -8,4 +8,11 @@
 	<artifactId>keystone-model</artifactId>
 	<name>OpenStack Keystone Model</name>
 	<description>OpenStack Keystone Model</description>
+	<dependencies>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>22.0</version>
+		</dependency>
+	</dependencies>
 </project>

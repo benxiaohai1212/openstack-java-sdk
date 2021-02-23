@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @JsonRootName("policy")
 public class Policy {
@@ -57,5 +59,21 @@ public class Policy {
 	public void setBlob(Map<String, String> blob) {
 		this.blob = blob;
 	}
-	
+
+	@Override
+	public String toString() {
+		ObjectMapper objectMapper = new ObjectMapper();
+		try {
+			return objectMapper.writeValueAsString(this);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		return "Policy{" +
+				"id='" + id + '\'' +
+				", projectId='" + projectId + '\'' +
+				", type='" + type + '\'' +
+				", userId='" + userId + '\'' +
+				", blob=" + blob +
+				'}';
+	}
 }

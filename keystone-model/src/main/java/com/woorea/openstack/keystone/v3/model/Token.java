@@ -7,6 +7,9 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.base.MoreObjects;
 
 @JsonRootName("token")
 @JsonIgnoreProperties(ignoreUnknown=true)
@@ -44,7 +47,20 @@ public class Token implements Serializable {
 		public void setName(String name) {
 			this.name = name;
 		}
-		
+
+		@Override
+		public String toString() {
+			ObjectMapper objectMapper = new ObjectMapper();
+			try {
+				return objectMapper.writeValueAsString(this);
+			} catch (JsonProcessingException e) {
+				e.printStackTrace();
+			}
+			return MoreObjects.toStringHelper(this)
+					.add("id",id)
+					.add("name",name)
+					.toString();
+		}
 	}
 	
 	private Domain domain;
@@ -81,38 +97,27 @@ public class Token implements Serializable {
 		public void setName(String name) {
 			this.name = name;
 		}
-		
+
+		@Override
+		public String toString() {
+			ObjectMapper objectMapper = new ObjectMapper();
+			try {
+				return objectMapper.writeValueAsString(this);
+			} catch (JsonProcessingException e) {
+				e.printStackTrace();
+			}
+			return MoreObjects.toStringHelper(this)
+					.add("id",id)
+					.add("name",name)
+					.add("domain",domain)
+					.toString();
+		}
 	}
 	
 	private Project project;
 	
 	@JsonIgnoreProperties(ignoreUnknown=true)
 	public static final class User {
-		
-		@JsonIgnoreProperties(ignoreUnknown=true)
-		private static final class Domain {
-			
-			private String id;
-			
-			private String name;
-
-			public String getId() {
-				return id;
-			}
-
-			public void setId(String id) {
-				this.id = id;
-			}
-
-			public String getName() {
-				return name;
-			}
-
-			public void setName(String name) {
-				this.name = name;
-			}
-			
-		}
 		
 		private String id;
 		
@@ -133,7 +138,7 @@ public class Token implements Serializable {
 		public void setName(String name) {
 			this.name = name;
 		}
-		
+
 	}
 	
 	private User user;
@@ -251,120 +256,97 @@ public class Token implements Serializable {
 	
 	private List<Service> catalog;
 
-
 	public String getId() {
 		return id;
 	}
-
-
 
 	public void setId(String id) {
 		this.id = id;
 	}
 
-
-
 	public Calendar getExpiresAt() {
 		return expiresAt;
 	}
-
-
 
 	public void setExpiresAt(Calendar expiresAt) {
 		this.expiresAt = expiresAt;
 	}
 
-
-
 	public Calendar getIssuedAt() {
 		return issuedAt;
 	}
-
-
 
 	public void setIssuedAt(Calendar issuedAt) {
 		this.issuedAt = issuedAt;
 	}
 
-
-
 	public List<String> getMethods() {
 		return methods;
 	}
-
-
 
 	public void setMethods(List<String> methods) {
 		this.methods = methods;
 	}
 
-
-
 	public Domain getDomain() {
 		return domain;
 	}
-
-
 
 	public void setDomain(Domain domain) {
 		this.domain = domain;
 	}
 
-
-
 	public Project getProject() {
 		return project;
 	}
-
-
 
 	public void setProject(Project project) {
 		this.project = project;
 	}
 
-
-
 	public User getUser() {
 		return user;
 	}
-
-
 
 	public void setUser(User user) {
 		this.user = user;
 	}
 
-
-
 	public List<Role> getRoles() {
 		return roles;
 	}
-
-
 
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
 	}
 
-
-
 	public List<Service> getCatalog() {
 		return catalog;
 	}
-
-
 
 	public void setCatalog(List<Service> catalog) {
 		this.catalog = catalog;
 	}
 
-	
 	@Override
 	public String toString() {
-		return "Token [id=" + id + ", expiresAt=" + expiresAt + ", issuedAt="
-				+ issuedAt + ", methods=" + methods + ", domain=" + domain
-				+ ", project=" + project + ", user=" + user + ", roles="
-				+ roles + ", catalog=" + catalog + "]";
+		ObjectMapper objectMapper = new ObjectMapper();
+		try {
+			return objectMapper.writeValueAsString(this);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		return MoreObjects.toStringHelper(this)
+				.add("id",id)
+				.add("expiresAt",expiresAt)
+				.add("issuedAt",issuedAt)
+				.add("methods",methods)
+				.add("domain",domain)
+				.add("project",project)
+				.add("user",user)
+				.add("roles",roles)
+				.add("catalog",catalog)
+				.toString();
 	}
 
 }
